@@ -50,9 +50,15 @@ static char	*ft_read_buffer(int fd, char *res)
 			free(buffer);
 			return (NULL);
 		}
-		s1 = res;
-		res = ft_strjoin(s1, buffer);
-		free(s1);
+		//printf("buffer %s\n", buffer);
+		if (nb_read != 0)
+		{
+			s1 = res;
+			res = ft_strjoin(s1, buffer);
+			ft_memset(buffer, 0, BUFFER_SIZE);
+			free(s1);
+		}
+		//printf("nb %ld\n", nb_read);
 	}
 	free(buffer);
 	return (res);
@@ -74,6 +80,8 @@ char	*get_next_line(int fd)
 	char		*res;
 	char		*s1;
 
+	if (fd < 0 || read(fd, 0, 0) == -1)
+		return (NULL);
 	buffer = ft_read_buffer(fd, buffer);
 	s1 = buffer;
 	res = ft_strndup(s1, 0, ft_find_endl(buffer));

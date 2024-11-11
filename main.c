@@ -19,12 +19,12 @@ int	main(void)
 	char	*test;
 	int		i;
 
-	file = ft_strndup("numbers.dict", 0, 12);
+	file = ft_strndup("43_no_nl", 0, 12);
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	while (i < 50)
+	while (i < 1)
 	{
 		test = get_next_line(fd);
 		printf("%s", test);
