@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dwianni <dwianni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 14:06:02 by dwianni           #+#    #+#             */
-/*   Updated: 2024/11/08 16:05:34 by dwianni          ###   ########.fr       */
+/*   Created: 2024/10/25 08:58:05 by dwianni           #+#    #+#             */
+/*   Updated: 2024/10/28 21:40:54 by dwianni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
+char	*ft_strdup(char *src)
+{
+	char	*dest;
+	size_t	i;
+
+	dest = (char *) malloc(sizeof(char) * (ft_strlen(src) + 1));
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (i < ft_strlen(src))
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+/*
 int	main(void)
 {
-	int		fd;
-	char	*file = "numbers.dict";
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
+	char *cpy;
+		
+	cpy = ft_strdup("0123456789");
+	printf("%s\n", cpy);
+	printf("%zu\n", ft_strlen(cpy));
+	free (cpy);
 	return (0);
 }
+*/

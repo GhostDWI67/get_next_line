@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dwianni <dwianni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 14:06:02 by dwianni           #+#    #+#             */
-/*   Updated: 2024/11/08 16:05:34 by dwianni          ###   ########.fr       */
+/*   Created: 2024/10/25 15:35:23 by dwianni           #+#    #+#             */
+/*   Updated: 2024/10/25 15:46:50 by dwianni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_putchar_fd(char c, int fd)
 {
-	int		fd;
-	char	*file = "numbers.dict";
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
+	write(fd, &c, 1);
+}
+/*
+int	main(int argc, char **argv)
+{
+	if (argc == 3)
+	{
+		ft_putchar_fd(argv[1][0], ft_atoi(argv[2]));
+	}
+	else
+		printf("Pas le bon nombre d'arguments !!");
 	return (0);
 }
+*/

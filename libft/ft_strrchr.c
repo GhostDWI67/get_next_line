@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dwianni <dwianni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 14:06:02 by dwianni           #+#    #+#             */
-/*   Updated: 2024/11/08 16:05:34 by dwianni          ###   ########.fr       */
+/*   Created: 2024/10/21 11:02:37 by dwianni           #+#    #+#             */
+/*   Updated: 2024/10/28 15:06:50 by dwianni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	int		fd;
-	char	*file = "numbers.dict";
+	int	i;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
+	i = ft_strlen(s);
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i--;
+	}
+	return (NULL);
+}
+/*
+int	main(int argc, char **argv)
+{
+	if (argc == 3)
+		printf("ft_strrchr : %s\n", ft_strrchr(argv[1], ft_atoi(argv[2])));
+	else
+		printf("Pas le bon nombre d'arguments !!");
 	return (0);
 }
+*/

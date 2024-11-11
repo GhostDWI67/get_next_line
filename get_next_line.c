@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static int	ft_find_end(char *str)
+static int	ft_find_endl(char *str)
 {
 	int	i;
 
@@ -24,20 +24,38 @@ static int	ft_find_end(char *str)
 
 char	*get_next_line(int fd)
 {
-	char	buffer[BUFFER_SIZE];
+	char	*buffer;
+	static char	*next_buffer;
 	char	*res;
-	int		r_ctrl;
+	char	*s1;
+	char	*s2;
+	ssize_t	r_ctrl;
 
-	res = ft_strdup("\0");
-	if (fd == -1)
-		return (NULL);
-	while (ft_find_end(buffer) != BUFFER_SIZE)
+	//printf("Fd %d\n", fd);
+	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	res = ft_strndup("\0", 1, 1);
+	buffer = next_buffer;
+	//printf("Strchr %s\n", ft_strchr(buffer, '\n'));
+	while(ft_strchr(buffer, '\n') == NULL)
 	{
-		r_ctrl = read(fd, buffer, BUFFER_SIZE);
-		if (r_ctrl == -1)
+		//printf("toto\n");
+		r_ctrl = read (fd, buffer, BUFFER_SIZE);
+		//printf("Read ctrl %ld\n", r_ctrl);
+		/*
+		if (r_ctrl == 0);
+		{
+			printf("titi\n");
 			return (NULL);
-		res = ft_strjoin(res, buffer);
+		}
+		*/
+		//printf("Buffer %s\n", buffer);
+		
+		s1 = res;
+		s2 = ft_strndup(buffer, 0, ft_find_endl(buffer));
+		res = ft_strjoin(s1, s2);
+		next_buffer = ft_strndup(buffer, ft_find_endl(buffer), BUFFER_SIZE);
+		free (s1);
+		free (s2);
 	}
-	res = ft_strjoin(res, buffer);
 	return (res);
 }

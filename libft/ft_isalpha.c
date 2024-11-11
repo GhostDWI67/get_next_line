@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dwianni <dwianni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 14:06:02 by dwianni           #+#    #+#             */
-/*   Updated: 2024/11/08 16:05:34 by dwianni          ###   ########.fr       */
+/*   Created: 2024/10/14 12:47:57 by dwianni           #+#    #+#             */
+/*   Updated: 2024/10/21 15:33:17 by dwianni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int	main(void)
+int	ft_isalpha(int c)
 {
-	int		fd;
-	char	*file = "numbers.dict";
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1024);
 	return (0);
 }
+/*
+int	main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		printf("%c ft_isalpha %d\n", ft_atoi(argv[1]),
+				ft_isalpha(ft_atoi(argv[1])));
+		printf("%c isalpha %d\n", ft_atoi(argv[1]), isalpha(ft_atoi(argv[1])));
+	}
+	else
+		printf("Pas le bon nombre d'arguments !!");
+	return (0);
+}
+*/

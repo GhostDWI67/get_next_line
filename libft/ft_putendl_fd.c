@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dwianni <dwianni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 14:06:02 by dwianni           #+#    #+#             */
-/*   Updated: 2024/11/08 16:05:34 by dwianni          ###   ########.fr       */
+/*   Created: 2024/10/25 15:57:06 by dwianni           #+#    #+#             */
+/*   Updated: 2024/10/28 22:37:07 by dwianni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_putendl_fd(char *s, int fd)
 {
-	int		fd;
-	char	*file = "numbers.dict";
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	printf("%s",get_next_line(fd));
-	printf("%s",get_next_line(fd));
+	if (s == NULL)
+		return ;
+	write(fd, s, (int)ft_strlen(s));
+	write(fd, &"\n", 1);
+}
+/*
+int	main(int argc, char **argv)
+{
+	if (argc == 3)
+	{
+		ft_putendl_fd(argv[1], ft_atoi(argv[2]));
+	}
+	else
+		printf("Pas le bon nombre d'arguments !!");
 	return (0);
 }
+*/

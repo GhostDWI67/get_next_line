@@ -17,13 +17,10 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include "libft/libft.h"
 
 //int	BUFFER_SIZE = 100;
 
 char	*get_next_line(int fd);
-char	*ft_strndup(char const *src, int first, int last);
-char	*ft_strdup(char *src);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *s);
 
 #endif
