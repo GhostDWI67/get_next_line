@@ -38,9 +38,7 @@ static char	*ft_read_buffer(int fd, char *res)
 
 	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (res == NULL)
-	{
 		res = calloc(1, sizeof(char));
-	}
 	nb_read = 1;
 	while (ft_strchr(res, '\n') == NULL && nb_read != 0)
 	{
@@ -50,15 +48,10 @@ static char	*ft_read_buffer(int fd, char *res)
 			free(buffer);
 			return (NULL);
 		}
-		//printf("buffer %s\n", buffer);
-		if (nb_read != 0)
-		{
-			s1 = res;
-			res = ft_strjoin(s1, buffer);
-			ft_memset(buffer, 0, BUFFER_SIZE);
-			free(s1);
-		}
-		//printf("nb %ld\n", nb_read);
+		s1 = res;
+		res = ft_strjoin(s1, buffer);
+		ft_memset(buffer, 0, BUFFER_SIZE + 1);
+		free(s1);
 	}
 	free(buffer);
 	return (res);
@@ -80,7 +73,7 @@ char	*get_next_line(int fd)
 	char		*res;
 	char		*s1;
 
-	if (fd < 0 || read(fd, 0, 0) == -1)
+	if (fd < 0 || read(fd, 0, 0) == -1 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = ft_read_buffer(fd, buffer);
 	s1 = buffer;

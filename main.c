@@ -19,12 +19,13 @@ int	main(void)
 	char	*test;
 	int		i;
 
-	file = ft_strndup("43_no_nl", 0, 12);
+	file = ft_strndup("read_error.txt", 0, 13);
+	printf("file %s\n", file);
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	while (i < 1)
+	while (i < 5)
 	{
 		test = get_next_line(fd);
 		printf("%s", test);
