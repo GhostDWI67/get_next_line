@@ -45,7 +45,7 @@ static char	*ft_read_buffer(int fd, char *res)
 		nb_read = read (fd, buffer, BUFFER_SIZE);
 		if (nb_read == -1)
 		{
-			free (res);
+			free(res);
 			free(buffer);
 			return (NULL);
 		}
@@ -68,27 +68,28 @@ static int	ft_find_endl(char *str)
 	return (i);
 }
 
-char	*get_next_line_bonus(int fd)
+char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[MAX_FD_OPEN];
 	char		*res;
 	char		*tmp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FD_OPEN)
 		return (NULL);
 	res = NULL;
-	buffer = ft_read_buffer(fd, buffer);
-	if (buffer == NULL || buffer[0] == 0)
+	buffer[fd] = ft_read_buffer(fd, buffer[fd]);
+	if (buffer[fd] == NULL || buffer[fd][0] == 0)
 	{
 		free(res);
 		res = NULL;
-		free(buffer);
-		buffer = NULL;
+		free(buffer[fd]);
+		buffer[fd] = NULL;
 		return (NULL);
 	}
-	tmp = buffer;
-	res = ft_strndup(tmp, 0, ft_find_endl(buffer));
-	buffer = ft_strndup(tmp, ft_find_endl(buffer) + 1, ft_strlen(buffer));
+	tmp = buffer[fd];
+	res = ft_strndup(tmp, 0, ft_find_endl(buffer[fd]));
+	buffer[fd] = ft_strndup(tmp, ft_find_endl(buffer[fd]) + 1,
+			ft_strlen(buffer[fd]));
 	free(tmp);
 	tmp = NULL;
 	return (res);

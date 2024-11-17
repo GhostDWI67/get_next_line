@@ -25,7 +25,11 @@
 #  define BUFFER_SIZE 1
 # endif
 
-char	*get_next_line_bonus(int fd);
+# ifndef MAX_FD_OPEN
+#  define MAX_FD_OPEN 20
+# endif
+
+char	*get_next_line(int fd);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 size_t	ft_strlen(const char *s);
