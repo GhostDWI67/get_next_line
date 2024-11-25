@@ -6,39 +6,11 @@
 /*   By: dwianni <dwianni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:31:46 by dwianni           #+#    #+#             */
-/*   Updated: 2024/11/11 16:39:50 by dwianni          ###   ########.fr       */
+/*   Updated: 2024/11/25 14:28:53 by dwianni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*result;
-
-	i = 0;
-	result = s;
-	while (i < n)
-	{
-		result[i] = c;
-		i++;
-	}
-	return (s);
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void	*result;
-
-	if (nmemb != 0 && (nmemb * size) / nmemb != size)
-		return (NULL);
-	result = (void *)malloc(nmemb * size);
-	if (result == NULL)
-		return (NULL);
-	ft_memset(result, 0, nmemb * size);
-	return (result);
-}
 
 size_t	ft_strlen(const char *s)
 {

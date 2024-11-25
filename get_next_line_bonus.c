@@ -6,7 +6,7 @@
 /*   By: dwianni <dwianni@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 13:31:25 by dwianni           #+#    #+#             */
-/*   Updated: 2024/11/15 16:23:24 by dwianni          ###   ########.fr       */
+/*   Updated: 2024/11/25 15:19:16 by dwianni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,43 @@ char	*ft_strndup(char const *src, int first, int last)
 	return (dest);
 }
 
+static void	ft_free(char **s1, char **s2)
+{
+	if (s1 != NULL && *s1 != NULL)
+	{
+		free(*s1);
+		*s1 = NULL;
+	}
+	if (s2 != NULL && *s2 != NULL)
+	{
+		free(*s2);
+		*s2 = NULL;
+	}
+}
+
 static char	*ft_read_buffer(int fd, char *res)
 {
 	char	*buffer;
 	char	*s1;
 	ssize_t	nb_read;
 
-	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (NULL);
 	if (res == NULL)
-		res = calloc(1, sizeof(char));
+		res = ft_strndup("", 0, 0);
 	nb_read = 1;
 	while (ft_strchr(res, '\n') == NULL && nb_read != 0)
 	{
 		nb_read = read (fd, buffer, BUFFER_SIZE);
 		if (nb_read == -1)
 		{
-			free(res);
-			free(buffer);
+			ft_free(&res, &buffer);
 			return (NULL);
 		}
+		buffer[nb_read] = '\0';
 		s1 = res;
 		res = ft_strjoin(s1, buffer);
-		ft_memset(buffer, 0, BUFFER_SIZE + 1);
 		free(s1);
 	}
 	free(buffer);
@@ -80,17 +95,13 @@ char	*get_next_line(int fd)
 	buffer[fd] = ft_read_buffer(fd, buffer[fd]);
 	if (buffer[fd] == NULL || buffer[fd][0] == 0)
 	{
-		free(res);
-		res = NULL;
-		free(buffer[fd]);
-		buffer[fd] = NULL;
+		ft_free(&res, &buffer[fd]);
 		return (NULL);
 	}
 	tmp = buffer[fd];
-	res = ft_strndup(tmp, 0, ft_find_endl(buffer[fd]));
-	buffer[fd] = ft_strndup(tmp, ft_find_endl(buffer[fd]) + 1,
-			ft_strlen(buffer[fd]));
-	free(tmp);
-	tmp = NULL;
+	res = ft_strndup(tmp, 0, ft_find_endl(tmp));
+	buffer[fd] = ft_strndup(tmp, ft_find_endl(tmp) + 1,
+			ft_strlen(tmp));
+	ft_free(&tmp, 0);
 	return (res);
 }
